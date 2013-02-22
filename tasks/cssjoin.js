@@ -36,17 +36,16 @@ module.exports = function(grunt) {
         // No src files, goto next target. Warn would have been issued above.
         nextFileObj();
       }
-      var compiled = []
+      var compiled = [];
       grunt.util.async.concatSeries(files, function(file, next) {
         cssjoin(file, options, function(err ,css){
-          
           if(!err){
-            compiled.push(css)
+            compiled.push(css);
             next(null);
           }else{
             nextFileObj(false);
           }
-        })
+        });
       }, function(){
          if (compiled.length < 1) {
           grunt.log.warn('Destination not written because compiled files were empty.');

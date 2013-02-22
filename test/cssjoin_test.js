@@ -30,18 +30,18 @@ exports.cssjoin = {
   default_options: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default.css');
+    var actual = grunt.file.read('tmp/default/bar.css');
+    var expected = grunt.file.read('test/expected/default/bar.css');
     test.equal(actual, expected, 'should describe what the default css is.');
     test.done();
   },
-  /*custom_options: function(test) {
+  path_options: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    var actual = grunt.file.read('tmp/path/bar.css');
+    var expected = grunt.file.read('test/expected/path/bar.css');
+    test.equal(actual, expected, 'should describe what the path option(s) behavior is.');
 
     test.done();
-  },*/
+  },
 };

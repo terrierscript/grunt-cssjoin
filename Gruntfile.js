@@ -27,16 +27,31 @@ module.exports = function(grunt) {
     clean: {
       tests: ['tmp'],
     },
-
     // Configuration to be run (and then tested).
     cssjoin: {
       defaultTest: {
         options: {
         },
-        files: {
-          'tmp/default.css': ['test/fixtures/default/*'],
-        },
+        files : {
+          './tmp/default/bar.css': ['./test/fixtures/default/bar.css']
+        }
       },
+      concatTest: {
+        options: {
+        },
+        files : {
+          './tmp/concat/concat.css': ['./test/fixtures/default/foo.css', './test/fixtures/default/bar.css']
+        }
+      },
+      pathTest: {
+        options: {
+          path : "./test/fixtures/path"
+        },
+        files : {
+          './tmp/path/bar.css': ['./test/fixtures/default/bar.css']
+        }
+      },
+      
     },
 
     // Unit tests.
