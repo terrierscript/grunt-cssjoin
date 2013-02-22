@@ -14,37 +14,49 @@ module.exports = function(grunt) {
   grunt.util = grunt.util || grunt.utils;
 
   grunt.registerMultiTask('cssjoin', 'Merge css @import', function() {
-    // TODO: ditch this when grunt v0.4 is released
-    var helpers = require('grunt-lib-contrib').init(grunt);
-
     var options = this.options(this, {
     });
-
+    grunt.verbose.writeflags(options, 'Options');
     var done = this.async();
-    console.log(this.files);
-    this.files.forEach(function(file){
-      var srcFiles = grunt.file.expandFiles(file.src);
-      //this.file.dest = path.normalize(this.file.dest);
-      grunt.util.async.forEachSeries(srcFiles, function(srcFile, next) {
-        var newFileDest = file.dest;
-        if (helpers.isIndividualDest(file.dest)) {
-          var basePath = helpers.findBasePath(srcFiles, options.basePath);
-          newFileDest = helpers.buildIndividualDest(file.dest, srcFile, basePath, options.flatten);
+    //this.file.dest = path.normalize(this.file.dest);
+    
+    grunt.util.async.forEachSeries(this.files, function(f, nextFileObj){
+      var destFile = f.dest;
+      
+      var files = f.src.filter(function(filepath) {
+        // Warn on and remove invalid source files (if nonull was set).
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Source file "' + filepath + '" not found.');
+          return false;
+        } else {
+          return true;
         }
-        cssjoin(srcFile, options, function(e,joinedCss){
-          if(e) {
-            done();
-          }
-          grunt.log.writeln('File ' + newFileDest.cyan + ' created.');
-          grunt.file.write(newFileDest,joinedCss || '');
-          next();
-        }, function(err){
-          done();
-        });
-        //console.log(joinedCss);
-      }, function(){
-        done();
       });
-    });
+      if (files.length === 0) {
+        // No src files, goto next target. Warn would have been issued above.
+        nextFileObj();
+      }
+      var compiled = []
+      grunt.util.async.concatSeries(files, function(file, next) {
+        cssjoin(file, options, function(err ,css){
+          
+          if(!err){
+            compiled.push(css)
+            next(null);
+          }else{
+            nextFileObj(false);
+          }
+        })
+      }, function(){
+         if (compiled.length < 1) {
+          grunt.log.warn('Destination not written because compiled files were empty.');
+        } else {
+          grunt.file.write(destFile, compiled.join(grunt.util.normalizelf(grunt.util.linefeed)));
+          grunt.log.writeln('File ' + destFile.cyan + ' created.');
+        }
+        nextFileObj();
+      });
+      //console.log(joinedCss);
+    }, done);
   });
 };
