@@ -1,6 +1,7 @@
 # grunt-cssjoin
 
-> Extend and join css @import loaded file
+Extend and join css @import loaded file
+- If you want cssjoin without grunt, check [cssjoin](http://github.com/suisho/cssjoin) rebository
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
@@ -25,60 +26,68 @@ In your project's Gruntfile, add a section named `cssjoin` to the data object pa
 ```js
 grunt.initConfig({
   cssjoin: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    production : {
+      options: {
+        // Task-specific options go here.
+      },
+      your_target: {
+        // Target-specific file lists and/or options go here.
+      },
+    }
   },
 })
 ```
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
-
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+#### options.path
+Type: `Array` or `String`
+Css @import resolve include paths()
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, execute [cssjoin](http://github.com/suisho/cssjoin) to single convert.
 
 ```js
 grunt.initConfig({
   cssjoin: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    join :{
+      files: {
+        'dest/bar.css': ['src/bar.css'],
+      },
+    }
   },
 })
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Path Options
+In this example, setting cssjoin's path.
 
 ```js
 grunt.initConfig({
   cssjoin: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    path_option :{
+      options: {
+        path : ["src/"]
+      },
+      files: {
+        'dest/default_options': ['src/foo.css', 'src/dir/bar.css'],
+      },
+    }
   },
+})
+```
+
+#### Convert Same File.
+In this example, execute [cssjoin](http://github.com/suisho/cssjoin) to same file
+```js
+grunt.initConfig({
+  sameFile : {
+    cssjoin: {
+      files:  grunt.file.expandMapping(["/src/*.css"]),
+    }
+  }
 })
 ```
 
@@ -86,5 +95,5 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+v0.1.1 release
 

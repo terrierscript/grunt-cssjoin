@@ -22,7 +22,6 @@ module.exports = function(grunt) {
     
     grunt.util.async.forEachSeries(this.files, function(f, nextFileObj){
       var destFile = f.dest;
-      
       var files = f.src.filter(function(filepath) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {

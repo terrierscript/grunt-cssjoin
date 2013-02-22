@@ -27,6 +27,22 @@ module.exports = function(grunt) {
     clean: {
       tests: ['tmp'],
     },
+    copy : {
+      teeTest : {
+        files : [
+          { expand :true,
+            isFile :true,
+            flatten : true,
+            src :"./test/fixtures/default/*.css" ,
+            dest : "tmp/sameFileTest/"
+          },
+          {
+            src : "tmp/sameFileTest/bar.css",
+            dest : "tmp/sameFileTestBefore/bar.css"
+          }
+        ]
+      }
+    },
     // Configuration to be run (and then tested).
     cssjoin: {
       defaultTest: {
@@ -51,6 +67,9 @@ module.exports = function(grunt) {
           './tmp/path/bar.css': ['./test/fixtures/default/bar.css']
         }
       },
+      sameFileTest : {
+        files : grunt.file.expandMapping(["./tmp/sameFileTest/*.css"]),
+      }
       
     },
 
@@ -74,10 +93,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
-
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'cssjoin', 'nodeunit']);
+  grunt.registerTask('test', ['clean','copy', 'cssjoin', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

@@ -44,4 +44,15 @@ exports.cssjoin = {
 
     test.done();
   },
+  sameFile: function(test) {
+    test.expect(2);
+
+    var before = grunt.file.read('tmp/sameFileTestBefore/bar.css');
+    var after = grunt.file.read('tmp/sameFileTest/bar.css');
+    var expected = grunt.file.read('test/expected/default/bar.css');
+    
+    test.notEqual(before, after, 'Before and After is different');
+    test.equal(after, expected , 'After is converted');
+    test.done();
+  },
 };
