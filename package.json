@@ -1,7 +1,7 @@
 {
   "name": "grunt-cssjoin",
   "description": "Extend and join css @import loaded file",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "homepage": "https://github.com/suisho/grunt-cssjoin",
   "author": {
     "name": "suisho",
@@ -39,7 +39,9 @@
     "grunt": "~0.4.0"
   },
   "keywords": [
-    "gruntplugin","css", "import"
+    "gruntplugin",
+    "css",
+    "import"
   ],
   "dependencies": {
     "cssjoin": "~0.2.0-0"
