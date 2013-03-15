@@ -61,10 +61,15 @@ module.exports = function(grunt) {
       },
       pathTest: {
         options: {
-          path : "./test/fixtures/path"
+          paths : "./test/fixtures/path"
         },
         files : {
-          './tmp/path/bar.css': ['./test/fixtures/default/bar.css']
+          './tmp/path/bar.css': ['./test/fixtures/path/htdocs/bar.css']
+        }
+      },
+      pathTestWithNoOption: {
+        files : {
+          './tmp/path_with_no_option/bar.css': ['./test/fixtures/path/htdocs/bar.css']
         }
       },
       sameFileTest : {

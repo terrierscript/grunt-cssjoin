@@ -40,7 +40,7 @@ grunt.initConfig({
 
 ### Options
 
-#### options.path
+#### options.paths
 Type: `Array` or `String`
 Css @import resolve include paths()
 
@@ -62,14 +62,14 @@ grunt.initConfig({
 ```
 
 #### Path Options
-In this example, setting cssjoin's path.
+In this example, setting cssjoin's paths.
 
 ```js
 grunt.initConfig({
   cssjoin: {
     path_option :{
       options: {
-        path : ["src/"]
+        paths : ["src/"]
       },
       files: {
         'dest/default_options': ['src/foo.css', 'src/dir/bar.css'],

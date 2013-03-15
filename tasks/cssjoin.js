@@ -19,7 +19,6 @@ module.exports = function(grunt) {
     grunt.verbose.writeflags(options, 'Options');
     var done = this.async();
     //this.file.dest = path.normalize(this.file.dest);
-    
     grunt.util.async.forEachSeries(this.files, function(f, nextFileObj){
       var destFile = f.dest;
       var files = f.src.filter(function(filepath) {
@@ -36,6 +35,7 @@ module.exports = function(grunt) {
         nextFileObj();
       }
       var compiled = [];
+      
       grunt.util.async.concatSeries(files, function(file, next) {
         cssjoin(file, options, function(err ,css){
           if(!err){

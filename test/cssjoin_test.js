@@ -44,6 +44,17 @@ exports.cssjoin = {
 
     test.done();
   },
+  
+  path_with_no_options: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/path_with_no_option/bar.css');
+    var expected = grunt.file.read('test/expected/path_with_no_option/bar.css');
+    test.equal(actual, expected, 'should describe what the path option(s) behavior is not(but with path).');
+
+    test.done();
+  },
+  
   sameFile: function(test) {
     test.expect(2);
 
