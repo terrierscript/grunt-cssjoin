@@ -83,8 +83,8 @@ grunt.initConfig({
 In this example, execute [cssjoin](http://github.com/suisho/cssjoin) to same file
 ```js
 grunt.initConfig({
-  sameFile : {
-    cssjoin: {
+  cssjoin: {
+    sameFile : {
       files:  grunt.file.expandMapping(["/src/*.css"]),
     }
   }
@@ -94,6 +94,4 @@ grunt.initConfig({
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
-## Release History
-v0.1.1 release
 
