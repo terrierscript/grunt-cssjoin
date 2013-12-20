@@ -1,7 +1,7 @@
 # grunt-cssjoin
 
 Extend and join css @import loaded file
-- If you want cssjoin without grunt, check [cssjoin](http://github.com/suisho/cssjoin) rebository
+- If you want cssjoin without grunt, check [cssjoin](http://github.com/suisho/cssjoin) repository
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
